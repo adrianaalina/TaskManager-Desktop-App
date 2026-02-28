@@ -97,5 +97,6 @@ public class TaskRepository
         using var command = new SQLiteCommand(query, connection);
         command.Parameters.AddWithValue("@id", id);
         command.ExecuteNonQuery();
+        
     }
 }

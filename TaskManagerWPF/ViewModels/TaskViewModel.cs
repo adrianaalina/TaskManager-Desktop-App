@@ -38,7 +38,8 @@ public class TaskViewModel : BaseViewModel
     private readonly IDialogService _dialogService;
     private string? _searchText;
     
-  
+    private readonly ProgressService _progressService = new ProgressService();
+    
     public string? SearchText
     {
         get => _searchText;
@@ -172,6 +173,7 @@ public class TaskViewModel : BaseViewModel
         _autoSaveTimer.Tick -= AutoSaveTimer_Tick;
         _autoSaveTimer.Tick += AutoSaveTimer_Tick;
         _autoSaveTimer.Start();
+        OnPropertyChanged(nameof(ProgressPercentage));
     }
     
     private void AutoSaveTimer_Tick(object? sender, EventArgs e)
@@ -233,7 +235,9 @@ public class TaskViewModel : BaseViewModel
     }
     
 
-    //constructor
+    public double ProgressPercentage => _progressService.CalculateProgress(TaskuriC);
+    
+    //constructorcurrent
     public TaskViewModel()
     {
         _notificationService = new NotificationService(() => TaskuriC);
@@ -304,7 +308,8 @@ public class TaskViewModel : BaseViewModel
         DeleteCommand = new RelayCommand(_ => DeleteSelected(), _ => SelectedTask != null);
 
         CommandManager.InvalidateRequerySuggested();
-       
+        
+        
     }
 
     
@@ -336,8 +341,8 @@ public class TaskViewModel : BaseViewModel
 
         OnPropertyChanged(nameof(Ora));
         OnPropertyChanged(nameof(Minut));
+        OnPropertyChanged(nameof(ProgressPercentage));
         
-
     }
     
 
@@ -384,6 +389,7 @@ public class TaskViewModel : BaseViewModel
         OnPropertyChanged(nameof(CurrentTask));
         OnPropertyChanged(nameof(Ora));
         OnPropertyChanged(nameof(Minut));
+        OnPropertyChanged(nameof(ProgressPercentage));
 
     }
 

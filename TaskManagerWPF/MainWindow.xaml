@@ -36,6 +36,14 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
+            <ProgressBar Height="20"
+                         Width="100"
+                         Minimum="0"
+                         Maximum="100"
+                         Value="{Binding DataContext.TaskVM.ProgressPercentage,
+                             RelativeSource={RelativeSource AncestorType=Window},
+                             Mode=OneWay}"
+                         Margin="10"/>
             <Grid>
                 <TextBox x:Name="txtTitlu" Text="{Binding TaskVM.CurrentTask.Titlu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                          Width="80" Margin="3" />
@@ -155,7 +163,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
         </StackPanel>
 
 
