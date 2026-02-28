@@ -29,7 +29,7 @@ public class TaskViewModel : BaseViewModel
     public List<FilterOption<PrioritateTask>> PrioritatiFiltru { get; }
 
     private ObservableCollection<TaskModel> _taskuriC = new();
-    private DispatcherTimer _notificationTimer;
+    private readonly NotificationService _notificationService;
 
     public ICollectionView TaskuriView {get; private set; }
 
@@ -215,6 +215,9 @@ public class TaskViewModel : BaseViewModel
     //constructor
     public TaskViewModel()
     {
+        _notificationService = new NotificationService(() => TaskuriC);
+        _notificationService.TaskDueSoon += OnTaskDueSoon;
+        _notificationService.Start();
         _dialogService = new DialogService();
         
         CurrentTask = new TaskModel(); 
@@ -280,11 +283,18 @@ public class TaskViewModel : BaseViewModel
         DeleteCommand = new RelayCommand(_ => DeleteSelected(), _ => SelectedTask != null);
 
         CommandManager.InvalidateRequerySuggested();
-        _notificationTimer= new DispatcherTimer();
-        _notificationTimer.Interval = TimeSpan.FromMinutes(1);
-        _notificationTimer.Start();
+       
     }
 
+    
+    private void OnTaskDueSoon(TaskModel task)
+    {
+        MessageBox.Show(
+            $"Taskul \"{task.Titlu}\" se apropie de deadline!",
+            "Reminder",
+            MessageBoxButton.OK,
+            MessageBoxImage.Warning);
+    }
     //Stergere
     private void DeleteSelected()
     {
