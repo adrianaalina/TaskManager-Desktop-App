@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Media;
 namespace TaskManagerWPF.Models;
 using System.ComponentModel;
+using TaskManagerWPF.Core;
 
 public enum StatusTask
 {

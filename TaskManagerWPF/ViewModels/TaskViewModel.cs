@@ -13,6 +13,8 @@ using TaskManagerWPF.ViewModels.Base;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
+using TaskManagerWPF.Core;
+
 namespace TaskManagerWPF.ViewModels;
 
 
@@ -35,7 +37,8 @@ public class TaskViewModel : BaseViewModel
 
     private readonly IDialogService _dialogService;
     private string? _searchText;
-
+    
+  
     public string? SearchText
     {
         get => _searchText;
@@ -144,6 +147,7 @@ public class TaskViewModel : BaseViewModel
            }
     }
 
+    private DispatcherTimer _autoSaveTimer = new();
     private void CurrentTask_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         CommandManager.InvalidateRequerySuggested();
@@ -160,6 +164,23 @@ public class TaskViewModel : BaseViewModel
             OnPropertyChanged(nameof(Ora));
             OnPropertyChanged(nameof(Minut));
         }
+        if (CurrentTask.Id == 0)
+            return;
+
+        _autoSaveTimer.Stop();
+        _autoSaveTimer.Interval = TimeSpan.FromSeconds(2);
+        _autoSaveTimer.Tick -= AutoSaveTimer_Tick;
+        _autoSaveTimer.Tick += AutoSaveTimer_Tick;
+        _autoSaveTimer.Start();
+    }
+    
+    private void AutoSaveTimer_Tick(object? sender, EventArgs e)
+    {
+        _autoSaveTimer.Stop();
+
+        _repo.Update(CurrentTask);
+
+        Console.WriteLine("AUTOSAVED");
     }
 
 
@@ -219,7 +240,7 @@ public class TaskViewModel : BaseViewModel
         _notificationService.TaskDueSoon += OnTaskDueSoon;
         _notificationService.Start();
         _dialogService = new DialogService();
-        
+      
         CurrentTask = new TaskModel(); 
         
         TaskuriView=CollectionViewSource.GetDefaultView(TaskuriC);
@@ -306,6 +327,7 @@ public class TaskViewModel : BaseViewModel
 
         if (!rezultat) return;
         _repo.Delete(SelectedTask.Id);
+        TaskEvents.RaiseTaskDeleted(SelectedTask.Id);
         
         TaskuriC.Remove(SelectedTask);
         SelectedTask = null;
@@ -326,6 +348,7 @@ public class TaskViewModel : BaseViewModel
         if (CurrentTask.Id == 0)
         {
             CurrentTask.Id = _repo.Insert(CurrentTask);
+            TaskEvents.RaiseTaskUpdated(CurrentTask);
             TaskuriC.Add(new TaskModel
             {
                 Id = CurrentTask.Id,
@@ -336,10 +359,12 @@ public class TaskViewModel : BaseViewModel
                 Status = CurrentTask.Status,
                 Prioritate = CurrentTask.Prioritate
             });
+            TaskEvents.RaiseTaskAdded(CurrentTask);
         }
         else
         {
             _repo.Update(CurrentTask);
+            TaskEvents.RaiseTaskUpdated(CurrentTask);
             var existing = TaskuriC.FirstOrDefault(t => t.Id == CurrentTask.Id);
             if (existing != null)
             {
@@ -350,6 +375,7 @@ public class TaskViewModel : BaseViewModel
                 existing.Status = CurrentTask.Status;
                 existing.Prioritate = CurrentTask.Prioritate;
             }
+            
         }
         // RESET FORMULAR
         TaskuriView.Refresh();
