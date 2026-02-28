@@ -22,4 +22,8 @@
       <None Include="bin\Debug\net8.0-windows\runtimes\Data\taskmanager.db" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Data\taskuri.db" />
+    </ItemGroup>
+
 </Project>

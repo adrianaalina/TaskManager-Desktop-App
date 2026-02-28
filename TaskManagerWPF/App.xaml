@@ -7,5 +7,12 @@
         <Style TargetType="Button">
              <Setter Property="Background" Value="#e1bfb0"/>
          </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+            </Style>
+
+            <Style TargetType="Control">
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+            </Style>
     </Application.Resources>
 </Application>

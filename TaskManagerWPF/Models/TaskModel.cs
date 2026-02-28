@@ -13,9 +13,9 @@ public enum StatusTask
 
 public enum CategoriiTask
 {
-    Personal,
-    Facultate,
-    Profesional,
+    Study,
+    Project,
+    Work,
     Nespecificat
 }
 public enum PrioritateTask
@@ -33,6 +33,7 @@ public class TaskModel : INotifyPropertyChanged, IDataErrorInfo
     private CategoriiTask categorie;
     private StatusTask status;
     private PrioritateTask prioritate;
+    public bool Notificat { get; set; } = false;
 
     public int Id
     {
@@ -136,6 +137,7 @@ public class TaskModel : INotifyPropertyChanged, IDataErrorInfo
                 case nameof(Deadline):
                     if (Deadline == null)
                         return "Selecteaza un deadline.";
+
                     if (Id == 0 && Deadline.Value < DateTime.Now)
                         return "Nu poti crea un task in trecut.";
                     break;
