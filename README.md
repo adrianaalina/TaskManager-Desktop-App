@@ -1,4 +1,4 @@
-# Task Manager WPF
+# TaskManager-Desktop-App
 
 Aplicație desktop pentru gestionarea eficientă a sarcinilor zilnice, dezvoltată în **C#** utilizând **WPF** și **SQLite**. Permite utilizatorilor să creeze, editeze, organizeze și prioritizeze task-urile într-un mod intuitiv.
 
