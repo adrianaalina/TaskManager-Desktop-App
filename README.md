@@ -1,140 +1,90 @@
-TaskManager Desktop App
+# 🚀 TASK MANAGER — Desktop Productivity Application
+### WPF • .NET 8 • SQLite • MVVM Architecture
 
-TaskManager este o aplicație desktop pentru gestionarea sarcinilor zilnice, dezvoltată în C# (.NET 8) folosind WPF și SQLite.
-Aplicația permite organizarea eficientă a task-urilor, monitorizarea progresului și notificarea utilizatorului înainte de deadline.
+Aplicație desktop pentru organizarea și urmărirea sarcinilor zilnice, dezvoltată în **C# (.NET 8)** utilizând **WPF** și **SQLite**.
 
-Proiectul a fost realizat pentru a exersa arhitectura MVVM, lucrul cu baze de date locale și dezvoltarea unei interfețe reactive în WPF.
+Proiectul simulează un produs real de productivitate (similar Microsoft To Do / Todoist) și pune accent atât pe **arhitectură software corectă**, cât și pe **experiența utilizatorului**: notificări automate, progres în timp real și actualizare live a interfeței.
 
-✨ Funcționalități principale
+---
 
-Creare, editare și ștergere task-uri
+## 📸 Screenshots
+*(vor fi adăugate după finalizarea designului UI)*
 
-Organizare pe categorii și priorități
+---
 
-Filtrare și căutare în timp real
+## ✨ Funcționalități
 
-Sortare automată după urgență și deadline
+### 📝 Gestionare Task-uri
+- Creare, editare și ștergere task-uri
+- Deadline cu dată și oră
+- Statusuri: `Neinceput`, `InLucru`, `Finalizat`
+- Categorii și priorități
+- Editare directă din interfață
 
-Notificări automate înainte de expirarea termenului limită
+### 🔔 Notificări inteligente
+- Verificare automată periodică a deadline-urilor
+- Avertizare înainte de expirarea unui task
+- Prevenirea notificărilor duplicate
 
-Evidențiere vizuală pentru:
+### 🔍 Filtrare & Căutare
+- Căutare în timp real după titlu
+- Filtrare după:
+  - status
+  - categorie
+  - prioritate
+- Sortare automată:
+  - task întârziat
+  - task de azi
+  - task viitor
 
-task-uri întârziate
+### 📊 Monitorizare progres
+- Progress bar calculat dinamic
+- Actualizare instant când un task este finalizat
+- Sistem de evenimente între model și UI
 
-task-uri din ziua curentă
+### 💾 Persistența datelor
+- Salvare permanentă folosind **SQLite**
+- Baza de date se creează automat la prima rulare
+- Încărcare automată a taskurilor la pornirea aplicației
 
-Bară de progres ce indică procentul de task-uri finalizate (actualizare live)
+### 🎨 Interfață utilizator
+- Interfață WPF bazată pe Styles & ControlTemplates
+- Card layout pentru taskuri
+- Highlight vizual pentru:
+  - taskuri întârziate
+  - taskuri din ziua curentă
+- Feedback vizual la hover și selectare
 
-Persistența datelor folosind SQLite (bază de date locală)
+---
 
-🧠 Arhitectură
+## 🧱 Arhitectură
 
-Aplicația este construită folosind Model-View-ViewModel (MVVM) pentru separarea clară a responsabilităților.
+Aplicația este construită folosind modelul **MVVM (Model-View-ViewModel)**:
 
-Structura proiectului
+| Layer | Responsabilitate |
+|------|------|
+| **Model** | Structura datelor și validare (`TaskModel`, `IDataErrorInfo`) |
+| **ViewModel** | Logica aplicației și binding-uri UI |
+| **View** | Interfața WPF și stilizare |
+| **Repository** | Operații CRUD SQLite |
+| **Services** | Notificări și calcul progres |
 
-Models → reprezintă datele (TaskModel + validare)
+---
 
-ViewModels → logica aplicației și binding către UI
+## 🛠️ Tehnologii utilizate
 
-Views → interfața WPF (XAML)
+- **C#**
+- **.NET 8**
+- **WPF**
+- **SQLite**
+- **MVVM Pattern**
+- **Data Binding & Commands**
+- **DispatcherTimer**
 
-Services → servicii independente (notificări, progres, dialoguri)
+---
 
-Data → acces la baza de date (SQLite)
+## ⚙️ Instalare
 
-Repository Pattern → gestionarea operațiilor CRUD
-
-Concepte implementate
-
-Data Binding
-
-INotifyPropertyChanged
-
-IDataErrorInfo validation
-
-ICommand (RelayCommand)
-
-DispatcherTimer pentru notificări
-
-Repository Pattern pentru accesul la date
-
-Service Layer (ProgressService, DialogService)
-
-🖥️ Tehnologii utilizate
-
-C#
-
-.NET 8
-
-WPF (Windows Presentation Foundation)
-
-SQLite
-
-MVVM Pattern
-
-🔔 Sistem de notificări
-
-Aplicația verifică periodic task-urile și notifică utilizatorul cu câteva minute înainte de deadline.
-Notificările sunt declanșate automat folosind DispatcherTimer.
-
-📊 Monitorizare progres
-
-Procentul de task-uri finalizate este calculat în timp real și afișat printr-un ProgressBar.
-Bară se actualizează automat la:
-
-modificarea statusului
-
-adăugarea unui task
-
-ștergerea unui task
-
-🛠️ Instalare și rulare
-
-Clonează repository-ul:
-
+1. Clonează repository-ul:
+```bash
 git clone https://github.com/adrianaalina/TaskManagerWPF.git
-
-Deschide soluția în Visual Studio 2022+ sau Rider
-
-Asigură-te că ai instalat:
-
-.NET Desktop Development
-
-.NET 8 SDK
-
-Rulează aplicația (F5)
-
-Baza de date SQLite va fi creată automat în folderul:
-
-/bin/Debug/net8.0-windows/Data
-📌 Scopul proiectului
-
-Acest proiect a fost realizat pentru:
-
-învățarea dezvoltării aplicațiilor desktop în WPF
-
-implementarea arhitecturii MVVM
-
-lucrul cu baze de date locale
-
-dezvoltarea unei interfețe reactive și orientate pe utilizator
-
-🔮 Dezvoltări viitoare
-
-Export / Import task-uri (CSV / JSON)
-
-Task-uri recurente
-
-Statistici de productivitate
-
-Dark Mode
-
-Auto-save
-
-👤 Autor
-
-Rusu Adriana Alina
-📧 adrirusu80@gmail.com
-
-🔗 https://github.com/adrianaalina
