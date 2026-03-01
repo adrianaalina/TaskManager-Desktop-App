@@ -1,5 +1,6 @@
 ﻿<Window x:Class="TaskManagerWPF.MainWindow"
-        
+        WindowState="Maximized"
+        SizeToContent="Manual"
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextRenderingMode="ClearType"
         UseLayoutRounding="True"
@@ -12,6 +13,7 @@
         xmlns:styles="clr-namespace:TaskManagerWPF.Styles"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Window.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="NullEnumTemplate">
@@ -162,43 +164,16 @@
                      x:Name="taskuri" 
                      SelectedItem="{Binding TaskVM.SelectedTask, Mode=TwoWay}" 
                      ItemsSource="{Binding TaskVM.TaskuriView}"
-                     Margin="8"
-                     Padding="10">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Style.Triggers>
-
-                            <!-- Task intarziat -->
-                            <DataTrigger Binding="{Binding EsteIntarziat}" Value="True">
-                                <Setter Property="Background" Value="#a61f1b"/>
-                                <Setter Property="Foreground" Value=" Black"/>
-                            </DataTrigger>
-
-                            <!-- Deadline azi -->
-                            <DataTrigger Binding="{Binding EsteAzi}" Value="True">
-                                <Setter Property="Background" Value="#bf8250"/>
-                                <Setter Property="Foreground" Value="Black"/>
-                            </DataTrigger>
-
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Border Background="{Binding BackgroundColor}" CornerRadius="6" Padding="4" Margin="2">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Titlu}" FontWeight="Bold" />
-                                    <TextBlock Text="{Binding Descriere}" FontStyle="Italic"/>
-                                    <TextBlock Text="{Binding Deadline, StringFormat='Deadline:{0:dd/MM/yyyy HH:mm}'}"/>
-                                    <TextBlock Text="{Binding Status}" FontStyle="Italic"/>
-                                    <TextBlock Text="{Binding Categorie}" FontStyle="Italic"/>
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+                     BorderThickness="0"
+                     Background="Transparent"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.CanContentScroll="False">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
             </ListBox>
 
 
