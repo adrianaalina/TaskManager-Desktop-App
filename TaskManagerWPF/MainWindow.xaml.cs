@@ -30,4 +30,13 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = new MainViewModel();
     }
+    private void datePickerDeadline_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var dp = sender as DatePicker;
+
+        if (dp == null) return;
+
+        var binding = dp.GetBindingExpression(DatePicker.SelectedDateProperty);
+        binding?.UpdateSource();
+    }
 }

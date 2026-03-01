@@ -29,76 +29,98 @@
         </ResourceDictionary>
     </Window.Resources>
    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid Margin="10">
 
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <ProgressBar Height="20"
-                         Width="100"
-                         Minimum="0"
-                         Maximum="100"
-                         Value="{Binding DataContext.TaskVM.ProgressPercentage,
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>   <!-- creare task -->
+            <RowDefinition Height="Auto"/>   <!-- progress -->
+            <RowDefinition Height="Auto"/>   <!-- filtre -->
+            <RowDefinition Height="*"/>      <!-- lista -->
+        </Grid.RowDefinitions>
+        
+            
+        <Border Grid.Row="0"
+                Padding="12"
+                Background="#F7F8FC"
+                CornerRadius="10">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <!-- RAND 1 -->
+
+                    <TextBox Grid.Row="0" Grid.Column="0"
+                             x:Name="txtTitlu"
+                             Text="{Binding TaskVM.CurrentTask.Titlu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+                    <TextBox Grid.Row="0" Grid.Column="1"
+                             x:Name="txtDescriere"
+                             Text="{Binding TaskVM.CurrentTask.Descriere, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+                    <DatePicker Grid.Row="0" Grid.Column="2"
+                                SelectedDate="{Binding TaskVM.CurrentTask.Deadline, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+                    <TextBox Grid.Row="0" Grid.Column="3"
+                             Text="{Binding TaskVM.Ora, Mode=TwoWay}"/>
+
+                    <TextBox Grid.Row="0" Grid.Column="4"
+                             Text="{Binding TaskVM.Minut, Mode=TwoWay}"/>
+
+
+                    <!-- RAND 2 -->
+
+                    <ComboBox Grid.Row="1" Grid.Column="0"
+                              ItemsSource="{Binding TaskVM.Categorii}"
+                              SelectedItem="{Binding TaskVM.CurrentTask.Categorie}"/>
+
+                    <ComboBox Grid.Row="1" Grid.Column="1"
+                              ItemsSource="{Binding TaskVM.Statusuri}"
+                              SelectedItem="{Binding TaskVM.CurrentTask.Status}"/>
+
+                    <ComboBox Grid.Row="1" Grid.Column="2"
+                              ItemsSource="{Binding TaskVM.Prioritati}"
+                              SelectedItem="{Binding TaskVM.CurrentTask.Prioritate}"/>
+
+
+                    <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="8">
+                        <Button Content="Salveaza" Command="{Binding TaskVM.AddCommand}"/>
+                        <Button Content="Sterge Task" Command="{Binding TaskVM.DeleteCommand}"/>
+                    </StackPanel>
+
+                </Grid>
+        </Border>
+        
+        <ProgressBar Grid.Row="1" 
+                     Height="20"
+                     Width="100"
+                     Minimum="0"
+                     Maximum="100"
+                     Value="{Binding DataContext.TaskVM.ProgressPercentage,
                              RelativeSource={RelativeSource AncestorType=Window},
                              Mode=OneWay}"
-                         Margin="10"/>
-            <Grid>
-                <TextBox x:Name="txtTitlu" Text="{Binding TaskVM.CurrentTask.Titlu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                         Width="80" Margin="3" />
-                <TextBlock Text="Scrie titlu" Foreground="Gray" IsHitTestVisible="False" Margin="10,5,0,0" Visibility="{Binding Text, ElementName=txtTitlu, Converter={StaticResource EmptyStringToVisibilityConvert}}" />
-            </Grid>
+                     Margin="5"/>
+          
 
-            <Grid>
-                <TextBox x:Name="txtDescriere" Text="{Binding TaskVM.CurrentTask.Descriere, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True }" Width="80" Margin="3" />
-                <TextBlock Text="Scrie descriere" Foreground="Gray" IsHitTestVisible="False" Margin="10,5,0,0" Visibility="{Binding Text, ElementName=txtDescriere, Converter={StaticResource EmptyStringToVisibilityConvert} }" />
-            </Grid>
-
-
-            <DatePicker Name="datePickerDeadline"  Width="100" Margin="3"  SelectedDate="{Binding TaskVM.CurrentTask.Deadline,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
-            <Grid>
-                <TextBox Name="txtOra"  Text="{Binding TaskVM.Ora, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50" Margin="3"/>
-                <TextBlock Text="Ora" Foreground="Gray" IsHitTestVisible="False" Margin="10,5,0,0" Visibility="{ Binding Text, ElementName=txtOra,Converter={StaticResource EmptyStringToVisibilityConvert}}"/>
-            </Grid>
-
-            <Grid>
-                <TextBox Name="txtMinut" Text="{Binding TaskVM.Minut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="50" Margin="3" />
-                <TextBlock Text="Minut" Foreground="Gray" IsHitTestVisible="False" Margin="10,5,0,0" Visibility="{ Binding Text, ElementName=txtMinut,Converter={StaticResource EmptyStringToVisibilityConvert}}"/>
-            </Grid>
-
-            <Grid>
-                <ComboBox x:Name="categorieComboBox"  ItemsSource="{Binding TaskVM.Categorii}"
-                          SelectedItem="{Binding TaskVM.CurrentTask.Categorie, Mode=TwoWay}"
-                           Margin="3" />
-            <TextBlock  Text="Categorie:" Foreground="DarkSlateGray" IsHitTestVisible="False" Margin="10,5,0,0" Visibility="{ Binding Text, ElementName=categorieComboBox,Converter={StaticResource EmptyStringToVisibilityConvert}}" Width="50"  /> 
-            </Grid>
-            
-            <Grid>
-                <ComboBox x:Name="statusComboBox" ItemsSource="{Binding TaskVM.Statusuri}"
-                          SelectedItem="{Binding TaskVM.CurrentTask.Status, Mode=TwoWay}"
-                           Margin="3"/>
-                <TextBlock Text="Status:" Foreground="DarkSlateGray" IsHitTestVisible="False" Margin="10,5,0,0" Visibility="{ Binding Text, ElementName=statusComboBox,Converter={StaticResource EmptyStringToVisibilityConvert}}" Width="45"  />
-            </Grid>
-            
-            <Grid>
-                <ComboBox x:Name="prioritateComboBox" ItemsSource="{Binding TaskVM.Prioritati}" Margin="3"
-                          SelectedItem="{Binding TaskVM.CurrentTask.Prioritate, Mode=TwoWay}"/>
-                <TextBlock Text="Prioritate:" Foreground="DarkSlateGray" IsHitTestVisible="False" Margin="10,5,0,0" Visibility="{ Binding Text, ElementName=prioritateComboBox,Converter={StaticResource EmptyStringToVisibilityConvert}}" Width="45" />
-            </Grid>
-
-            <Grid Height="291" Width="105">
-                <Button Content="Sterge Task"
-                        Command="{Binding TaskVM.DeleteCommand}"
-                        Width="100"
-                        Height="30"
-                        Margin="0, 90 ,0,30"/>
-               
-            <Button Content="Salveaza" Command="{Binding TaskVM.AddCommand}" Width="100" Height="30" Margin="0,0,0,90"/> 
-            </Grid> 
-
-            <StackPanel Orientation="Horizontal" Margin="0,5">
+            <StackPanel Grid.Row="2" 
+                        Orientation="Horizontal" 
+                        Margin="0,5">
 
                 <ComboBox Width="70"
                           ItemsSource="{Binding TaskVM.StatusuriFiltru}"
@@ -126,7 +148,13 @@
                          Text="{Binding TaskVM.SearchText, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center"/>
             </StackPanel>
-            <ListBox x:Name="taskuri" SelectedItem="{Binding TaskVM.SelectedTask, Mode=TwoWay}" ItemsSource="{Binding TaskVM.TaskuriView}" Width="200" Height="300"  Margin="8" Padding="10">
+        
+            <ListBox Grid.Row="3"
+                     x:Name="taskuri" 
+                     SelectedItem="{Binding TaskVM.SelectedTask, Mode=TwoWay}" 
+                     ItemsSource="{Binding TaskVM.TaskuriView}"
+                     Margin="8"
+                     Padding="10">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Style.Triggers>
@@ -163,7 +191,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </StackPanel>
 
 
     </Grid>
