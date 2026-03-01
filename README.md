@@ -8,7 +8,11 @@ Proiectul simulează un produs real de productivitate (similar Microsoft To Do /
 ---
 
 ## 📸 Screenshots
-*(vor fi adăugate după finalizarea designului UI)*
+
+<img width="1787" height="786" alt="Captură de ecran 2026-03-01 144410" src="https://github.com/user-attachments/assets/4cabd4de-1914-42d1-ac06-c09ae2614047" />
+
+<img width="1789" height="689" alt="image" src="https://github.com/user-attachments/assets/32504506-17d3-4fed-bf5c-5010f5d065aa" />
+
 
 ---
 
