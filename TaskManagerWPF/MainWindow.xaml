@@ -27,7 +27,7 @@
             <Style TargetType="{x:Type TextBox}">
                 <Style.Triggers>
                     <Trigger Property="Validation.HasError" Value="True">
-                        <Setter Property="BorderBrush" Value="Red"></Setter>
+                        <Setter Property="BorderBrush" Value="#3B2A22"></Setter>
                         <Setter Property="BorderThickness" Value="2"></Setter>
                         <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"></Setter>
                     </Trigger>
@@ -48,7 +48,6 @@
             
         <Border Grid.Row="0"
                 Padding="12"
-                Background="#F7F8FC"
                 CornerRadius="10">
 
                 <Grid>
@@ -116,15 +115,6 @@
                 </Grid>
         </Border>
         
-        <ProgressBar Grid.Row="1" 
-                     Height="20"
-                     Width="100"
-                     Minimum="0"
-                     Maximum="100"
-                     Value="{Binding DataContext.TaskVM.ProgressPercentage,
-                             RelativeSource={RelativeSource AncestorType=Window},
-                             Mode=OneWay}"
-                     Margin="5"/>
           
 
             <StackPanel Grid.Row="2" 
@@ -159,6 +149,15 @@
                          Text="{Binding TaskVM.SearchText, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center"/>
             </StackPanel>
+            <ProgressBar Grid.Row="2" 
+                         Height="20"
+                         Width="100"
+                         Minimum="0"
+                         Maximum="100"
+                         Value="{Binding DataContext.TaskVM.ProgressPercentage,
+                                 RelativeSource={RelativeSource AncestorType=Window},
+                                 Mode=OneWay}"
+                         Margin="5"/>
         
             <ListBox Grid.Row="3"
                      x:Name="taskuri" 

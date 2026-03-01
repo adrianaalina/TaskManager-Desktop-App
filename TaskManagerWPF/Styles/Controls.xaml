@@ -8,16 +8,12 @@
         <Setter Property="Margin" Value="4"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="6,2"/>
-        <Setter Property="BorderBrush" Value="#C5C9D3"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="White"/>
     </Style>
     
     <Style TargetType="TextBox" x:Key="HintTextBox">
         <Setter Property="Padding" Value="6"/>
-        <Setter Property="BorderBrush" Value="#D0D3E2"/>
         <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="Background" Value="White"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
                 <Setter.Value>
@@ -33,7 +29,6 @@
 
                             <TextBlock x:Name="Hint"
                                        Text="{TemplateBinding Tag}"
-                                       Foreground="#9AA0A6"
                                        Margin="8,0,0,0"
                                        VerticalAlignment="Center"
                                        IsHitTestVisible="False"/>
@@ -80,8 +75,8 @@
         <Setter Property="Height" Value="30"/>
         <Setter Property="Margin" Value="4"/>
         <Setter Property="Padding" Value="12,5"/>
-        <Setter Property="Background" Value="#e1bfb0"/>
-        <Setter Property="BorderBrush" Value="#d2a999"/>
+        <Setter Property="Background" Value="#C2A58A"/>
+        <Setter Property="BorderBrush" Value="#C79B2A"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
@@ -90,28 +85,25 @@
     <!-- Expender style -->
     <DataTemplate DataType="{x:Type models:TaskModel}">
     
-        <Border Width="320" 
+        <Border Width="350" 
                 Margin="6"
-                BorderBrush="#DCDDE1"
                 BorderThickness="1"
                 CornerRadius="10"
                 Padding="4">
 
             <Border.Style>
                 <Style TargetType="Border">
-
-                    <Setter Property="Background" Value="#F5F6FA"/>
-
+                    
                     <Style.Triggers>
 
                         <!-- intarziat -->
                         <DataTrigger Binding="{Binding EsteIntarziat}" Value="True">
-                            <Setter Property="Background" Value="#d64541"/>
+                            <Setter Property="Background" Value="#6B4E3D"/>
                         </DataTrigger>
 
                         <!-- azi -->
                         <DataTrigger Binding="{Binding EsteAzi}" Value="True">
-                            <Setter Property="Background" Value="#e0a458"/>
+                            <Setter Property="Background" Value="#E6D7C8"/>
                         </DataTrigger>
 
                     </Style.Triggers>

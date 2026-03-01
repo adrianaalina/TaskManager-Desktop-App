@@ -10,6 +10,7 @@
 
                 <!--STYLESHEET  -->
                 <ResourceDictionary Source="Styles/Controls.xaml"/>
+                <ResourceDictionary Source="Styles/Themes.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

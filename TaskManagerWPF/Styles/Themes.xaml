@@ -1,0 +1,71 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+           
+    <!-- FUNDALURI -->
+    <SolidColorBrush x:Key="AppBackground" Color="#F4EFEA"/>
+    <SolidColorBrush x:Key="CardBackground" Color="#E6D7C8"/>
+    <SolidColorBrush x:Key="CardSelected" Color="#C2A58A"/>
+    <SolidColorBrush x:Key="PrimaryMocha" Color="#8B6A58"/>
+    <SolidColorBrush x:Key="DarkMocha" Color="#6B4E3D"/>
+    
+    <!-- TEXT -->
+    <SolidColorBrush x:Key="PrimaryText" Color="#3B2A22"/>
+    <SolidColorBrush x:Key="WhiteText" Color="White"/>
+    
+    <!-- GLOBAL WINDOW -->
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="{StaticResource AppBackground}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+    </Style>
+
+    <!-- TEXTBLOCK -->
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+    </Style>
+    
+    <!-- TEXTBOX -->
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryMocha}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="6"/>
+    </Style>
+    
+    <!-- COMBOBOX -->
+    <Style TargetType="ComboBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryMocha}"/>
+        <Setter Property="Padding" Value="4"/>
+    </Style>
+    
+    <!-- AURIU -->
+    <SolidColorBrush x:Key="Gold" Color="#D4AF37"/>
+    <SolidColorBrush x:Key="GoldHover" Color="#A87C1F"/>
+    
+    <!-- PRIMARY BUTTON (Salveaza) -->
+     <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource Gold}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteText}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource GoldHover}"/>
+            </Trigger>
+        </Style.Triggers>
+     </Style>
+    
+    
+    <!-- PROGRESS BAR -->
+    <Style TargetType="ProgressBar">
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryMocha}"/>
+    </Style>
+    
+</ResourceDictionary>       
