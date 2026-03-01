@@ -40,18 +40,18 @@
 
                         <ControlTemplate.Triggers>
 
-                            <Trigger Property="Text" Value="">
-                                <Setter TargetName="Hint" Property="Visibility" Value="Visible"/>
-                            </Trigger>
+                            <DataTrigger Binding="{Binding Text.Length, RelativeSource={RelativeSource TemplatedParent}}" Value="0">
+                            <Setter TargetName="Hint" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
 
-                            <Trigger Property="Text" Value="{x:Null}">
-                                <Setter TargetName="Hint" Property="Visibility" Value="Visible"/>
-                            </Trigger>
-
+                            <DataTrigger Binding="{Binding Text.Length, RelativeSource={RelativeSource TemplatedParent}}" Value="1">
+                                <Setter TargetName="Hint" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            
                             <Trigger Property="IsKeyboardFocused" Value="True">
                                 <Setter TargetName="Hint" Property="Visibility" Value="Collapsed"/>
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#7B8CFF"/>
                             </Trigger>
+
 
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
